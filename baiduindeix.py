@@ -13,16 +13,17 @@ Created on Sun May 03 09:36:12 2015
 from urllib.request import urlopen
 from urllib.parse import urlencode
 import json
+from bs4 import BeautifulSoup
 
 # 注意这里用unicode编码，否则会显示乱码
-content = input(u"请输入要翻译的内容：")
+# content = input(u"请输入要翻译的内容：")
 # 网址是Fig6中的 Response URL
-url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&smartresult=ugc&sessionFrom=http://www.youdao.com/'
+# url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&smartresult=ugc&sessionFrom=http://www.youdao.com/'
 url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule'
 # 爬下来的数据 data格式是Fig7中的 Form Data
 # data = {}
 # data['type'] = 'AUTO'
-# data['i'] = content
+# data['i'] = 'I am working at home.'
 # data['doctype'] = 'json'
 # data['xmlVersion'] = '1.6'
 # data['keyfrom'] = 'fanyi.web'
@@ -31,7 +32,7 @@ url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule'
 
 
 data = {}
-data['i'] = 'f'
+data['i'] = 'I am working at home.'
 data['from'] = 'AUTO'
 data['to'] = 'AUTO'
 data['smartresult'] = 'dict'
@@ -48,13 +49,19 @@ data['typoResult'] = 'true'
 data = urlencode(data)
 
 # 按照data的格式从url爬内容
-response = urlopen(url, data)
+response = urlopen(url, b'data')
 # 将爬到的内容读出到变量字符串html，
 html = response.read()
+home_content = BeautifulSoup(html, 'lxml')
+print(home_content.prettify())
+# outf = open('out.html', 'w')
+# outcontent = home_content.prettify()
+# outf.write(outcontent.encode('utf-8'))
 # 将字符串转换成Fig8所示的字典形式
 target = json.loads(html)
 # 根据Fig8的格式，取出最终的翻译结果
-result = target["translateResult"][0][0]['tgt']
+# result = target["translateResult"][0][0]['tgt']
+print(target)
 
 # 这里用unicode显示中文，避免乱码
-print(u"翻译结果：%s" % (target["translateResult"][0][0]['tgt']))
+# print(u"翻译结果：%s" % (target["translateResult"][0][0]['tgt']))
