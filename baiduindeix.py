@@ -18,32 +18,32 @@ from bs4 import BeautifulSoup
 # 注意这里用unicode编码，否则会显示乱码
 # content = input(u"请输入要翻译的内容：")
 # 网址是Fig6中的 Response URL
-# url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&smartresult=ugc&sessionFrom=http://www.youdao.com/'
-url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule'
+url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&smartresult=ugc&sessionFrom=http://www.youdao.com/'
+# url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule'
 # 爬下来的数据 data格式是Fig7中的 Form Data
-# data = {}
-# data['type'] = 'AUTO'
-# data['i'] = 'I am working at home.'
-# data['doctype'] = 'json'
-# data['xmlVersion'] = '1.6'
-# data['keyfrom'] = 'fanyi.web'
-# data['ue'] = 'UTF-8'
-# data['typoResult'] = 'true'
-
-
 data = {}
+data['type'] = 'AUTO'
 data['i'] = 'I am working at home.'
-data['from'] = 'AUTO'
-data['to'] = 'AUTO'
-data['smartresult'] = 'dict'
-data['client'] = 'fanyideskweb'
-data['salt'] = '1528349312469'
-data['sign'] = '1f6203acbf608960ad7450434817fbe7'
 data['doctype'] = 'json'
-data['version'] = '2.1'
+data['xmlVersion'] = '1.6'
 data['keyfrom'] = 'fanyi.web'
-data['action'] = 'FY_BY_REALTIME'
+data['ue'] = 'UTF-8'
 data['typoResult'] = 'true'
+
+
+# data = {}
+# data['i'] = 'I am working at home.'
+# data['from'] = 'AUTO'
+# data['to'] = 'AUTO'
+# data['smartresult'] = 'dict'
+# data['client'] = 'fanyideskweb'
+# data['salt'] = '1528349312469'
+# data['sign'] = '1f6203acbf608960ad7450434817fbe7'
+# data['doctype'] = 'json'
+# data['version'] = '2.1'
+# data['keyfrom'] = 'fanyi.web'
+# data['action'] = 'FY_BY_REALTIME'
+# data['typoResult'] = 'true'
 
 # 数据编码
 data = urlencode(data)
